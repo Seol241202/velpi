@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velpi — Your Pet's Health Hub</title>
+  <meta name="description" content="Health records, food checks, vet finder, insurance — everything your pet needs, all in one place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yellow: #FBE64D;
+      --red: #f30e15;
+      --blue: #205fcc;
+      --orange: #fa6b02;
+      --pink: #fca7de;
+      --green: #63CC79;
+      --black: #111111;
+      --bg: #f4f2ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--black); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--yellow);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px;
+      border-bottom: 2px solid var(--black);
+    }
+    .nav-logo svg { width: 80px; height: auto; }
+    .nav-btn {
+      background: var(--black); color: var(--yellow);
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+      padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer;
+      text-decoration: none; display: inline-block;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--yellow);
+      padding: 120px 24px 60px;
+      text-align: center;
+      border-bottom: 2px solid var(--black);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--black); color: var(--yellow);
+      font-size: 11px; font-weight: 600;
+      padding: 6px 16px; border-radius: 20px;
+      margin-bottom: 24px; letter-spacing: 1px;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 800; line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero p {
+      font-size: clamp(15px, 2vw, 18px);
+      color: #333; line-height: 1.7;
+      max-width: 560px; margin: 0 auto 36px;
+    }
+    .cta-row {
+      display: flex; gap: 12px;
+      justify-content: center; align-items: center;
+      flex-wrap: wrap;
+    }
+    .cta-main {
+      background: var(--red); color: var(--yellow);
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+      padding: 16px 32px; border-radius: 16px; border: none; cursor: pointer;
+      text-decoration: none; display: inline-block;
+    }
+    .cta-main:hover { opacity: 0.9; }
+
+    /* PET BAR */
+    .pet-bar {
+      background: var(--black);
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 24px;
+    }
+    .pet-ava {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--yellow); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+      border: 2px solid var(--red);
+    }
+    .pet-name { font-size: 16px; font-weight: 700; color: var(--yellow); }
+    .pet-breed { font-size: 12px; color: rgba(255,255,255,0.45); }
+    .pet-add {
+      margin-left: auto; width: 38px; height: 38px;
+      border-radius: 50%; background: var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--black); font-size: 22px; font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 60px 24px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .section-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 2.5px; opacity: 0.35;
+      margin-bottom: 20px;
+    }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .feat-card {
+      border-radius: 24px; padding: 28px 22px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .feat-icon {
+      font-size: 24px; width: 48px; height: 48px;
+      border-radius: 14px; display: flex;
+      align-items: center; justify-content: center;
+    }
+    .feat-label { font-size: 16px; font-weight: 700; line-height: 1.2; }
+    .feat-desc { font-size: 13px; line-height: 1.6; opacity: 0.7; }
+
+    /* AI SECTION */
+    .ai-section {
+      background: var(--blue);
+      padding: 60px 24px;
+    }
+    .ai-inner { max-width: 800px; margin: 0 auto; }
+    .ai-tag {
+      display: inline-block;
+      background: rgba(251,230,77,0.18); color: var(--yellow);
+      font-size: 10px; font-weight: 600;
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 16px; letter-spacing: 1px;
+    }
+    .ai-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800; color: #fff;
+      line-height: 1.2; margin-bottom: 14px;
+    }
+    .ai-section p {
+      font-size: 15px; color: rgba(255,255,255,0.7);
+      line-height: 1.7; margin-bottom: 28px;
+      max-width: 560px;
+    }
+    .risk-grid {
+      display: flex; flex-direction: column; gap: 10px;
+      max-width: 480px;
+    }
+    .risk-item {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 14px 16px;
+    }
+    .risk-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .risk-text { font-size: 14px; color: #fff; font-weight: 600; }
+
+    /* WAITLIST */
+    .waitlist {
+      background: var(--red);
+      padding: 60px 24px;
+    }
+    .waitlist-inner {
+      max-width: 560px; margin: 0 auto; text-align: center;
+    }
+    .waitlist h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; color: var(--yellow);
+      margin-bottom: 10px;
+    }
+    .waitlist p {
+      font-size: 15px; color: rgba(255,255,255,0.75);
+      line-height: 1.6; margin-bottom: 28px;
+    }
+    .waitlist-form {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .waitlist-input {
+      flex: 1; min-width: 240px;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 14px; padding: 15px 18px;
+      font-family: 'Poppins', sans-serif; font-size: 14px;
+      color: #fff; outline: none;
+    }
+    .waitlist-input::placeholder { color: rgba(255,255,255,0.5); }
+    .waitlist-btn {
+      background: var(--yellow); color: var(--black);
+      font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700;
+      padding: 15px 28px; border-radius: 14px; border: none; cursor: pointer;
+      white-space: nowrap;
+    }
+    .waitlist-fine {
+      font-size: 11px; color: rgba(255,255,255,0.4);
+      margin-top: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px;
+    }
+    footer svg { width: 60px; height: auto; }
+    .footer-text {
+      font-size: 11px; color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 600px) {
+      .feat-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M108,170l-20-.35,44-69.5h46.3l-61,85.6h-39.5L0,100.15h46.2l42.1,69.85Z" fill="#111"/>
+        <path d="M270,155.5h41.3c-1.05,6.76-4.4,12.65-10.05,17.65-5.65,5.01-13.86,8.88-24.66,11.63-10.78,2.73-24.5,4.11-41.17,4.11-17.6,0-32.77-1.4-45.53-4.2-12.75-2.8-22.58-7.52-29.45-14.16-6.88-6.64-10.31-15.61-10.31-26.93s3.35-20.13,10.05-26.83c6.71-6.7,16.41-11.5,29.11-14.42,12.7-2.91,28.08-4.37,46.13-4.37s32.23,1.57,43.52,4.72c11.3,3.15,19.63,8.24,25,15.3,5.37,7.06,7.93,16.59,7.69,28.57h-118.87c.58,3.04,2.25,5.83,4.98,8.39,2.74,2.56,6.99,4.63,12.76,6.21,5.77,1.57,13.48,2.36,23.16,2.36s18.27-.7,24.74-2.1c6.47-1.4,10.35-3.38,11.63-5.94ZM236.9,124.5c-12.35,0-21.77,1.34-28.23,4.02-6.47,2.68-10.29,5.36-11.45,8.04h76.93c-.81-3.03-4.08-5.8-9.79-8.29-5.71-2.51-14.86-3.76-27.45-3.76Z" fill="#111"/>
+        <path d="M318,38h41.97v120.63h-41.97V38Z" fill="#111"/>
+        <path d="M362,100h39.52l2.45,33.24v87.41h-41.97V100ZM461.7,176.5c-10.49,0-19.94-1.08-28.34-3.23s-15.56-5.24-21.5-9.27c-5.95-4.02-10.49-8.83-13.65-14.42-3.15-5.59-4.72-11.77-4.72-18.53s1.57-12.9,4.72-18.43c3.15-5.53,7.69-10.31,13.65-14.33,5.95-4.02,13.11-7.1,21.5-9.27,8.39-2.15,17.84-3.23,28.34-3.23,12.59,0,23.8,1.78,33.66,5.33,9.86,3.56,17.58,8.72,23.16,15.47,5.59,6.77,8.39,14.92,8.39,24.47s-2.8,18.43-8.39,25.18c-5.59,6.77-13.31,11.84-23.16,15.2-9.86,3.37-21.07,5.07-33.66,5.07ZM443.7,148c4.47,0,8.27-.39,11.43-1.18,3.15-.79,5.55-1.95,7.19-3.5,1.64-1.54,2.46-3.5,2.46-5.86,0-3.48-1.84-6.1-5.52-7.88-3.68-1.77-8.86-2.66-15.56-2.66-4.99,0-9.57.29-13.74.89-4.17.59-7.52,1.66-10.04,3.2-2.53,1.54-3.79,3.69-3.79,6.45s1.26,4.91,3.79,6.45c2.52,1.54,5.87,2.61,10.04,3.2,4.17.59,8.75.89,13.74.89Z" fill="#f30e15"/>
+        <rect x="508" y="100" width="41.97" height="85.68" fill="#111"/>
+        <path d="M539.5,90c-2.08-.64-3.49-2.6-4.03-4.66-1.15-4.4-5.13-7.58-9.44-7.61-4.3.04-8.19,3.22-9.34,7.61-.54,2.06-1.95,4.02-4.03,4.66-4.8,1.47-7.88,5.72-7.55,10.54.32,4.57,3.65,9.28,8.17,9.28,4.94,0,5.55-2.03,8.02-3.02,0,0,2.47-1.1,4.77-1.1s4.77,1.1,4.77,1.1c2.47.98,3.07,3.02,8.02,3.02,4.52,0,7.85-4.7,8.17-9.28.33-4.82-2.74-9.07-7.55-10.54Z" fill="#f30e15"/>
+        <path d="M531.3,63.5c3.99-1.65,8.06.51,9.29,4.29,1.11,3.42-.42,7.33-3.96,8.73s-7.55-.12-9.16-3.72c-1.49-3.3-.11-7.65,3.83-9.29Z" fill="#f30e15"/>
+        <path d="M512.8,63.6c3.78-1.69,7.88.13,9.38,3.5s.07,7.75-3.56,9.32c-3.3,1.43-7.48.26-9.12-3.14s-.68-7.9,3.29-9.68Z" fill="#f30e15"/>
+        <path d="M501.3,79.3c3.62-1.56,7.49.18,8.79,3.48s.02,7.04-3.62,8.65c-2.95,1.29-6.67.05-8.34-3.13s-.55-7.4,3.17-8.99Z" fill="#f30e15"/>
+        <path d="M543.7,79.2c3.7-1.42,7.37.51,8.59,3.88s-.35,7.18-4.16,8.53c-2.9,1.03-6.71-.34-8.16-3.74-1.29-3-.12-7.19,3.74-8.67Z" fill="#f30e15"/>
+      </svg>
+    </div>
+    <a href="#waitlist" class="nav-btn">Join waitlist</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">YOUR PET'S HEALTH HUB</div>
+    <h1>Everything your pet needs,<br><span>all in one place.</span></h1>
+    <p>Health records, food checks, vet finder, insurance — stop switching between apps. Velpi has it all.</p>
+    <div class="cta-row">
+      <a href="#waitlist" class="cta-main">Get early access →</a>
+    </div>
+  </section>
+
+  <!-- PET BAR -->
+  <div class="pet-bar">
+    <div class="pet-ava">🐶</div>
+    <div>
+      <div class="pet-name">Seol</div>
+      <div class="pet-breed">Maltipoo · 3 yrs · 3.2 kg</div>
+    </div>
+    <div class="pet-add">+</div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="section-label">BUILT FOR REAL PET PARENTS</div>
+    <div class="feat-grid">
+      <div class="feat-card" style="background:#205fcc;">
+        <div class="feat-icon" style="background:rgba(251,230,77,0.18);">📸</div>
+        <div class="feat-label" style="color:#fff;">AI Health Check</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">Snap a photo, get an instant risk level. No panic, just answers.</div>
+      </div>
+      <div class="feat-card" style="background:#FBE64D;">
+        <div class="feat-icon" style="background:rgba(0,0,0,0.07);">🍖</div>
+        <div class="feat-label" style="color:#111;">Food Checker</div>
+        <div class="feat-desc" style="color:#555;">Find safe foods and the right kibble for your pet's needs.</div>
+      </div>
+      <div class="feat-card" style="background:#63CC79;">
+        <div class="feat-icon" style="background:rgba(255,255,255,0.2);">💉</div>
+        <div class="feat-label" style="color:#fff;">Vaccine Diary</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">Track every shot and never miss a booster again.</div>
+      </div>
+      <div class="feat-card" style="background:#fa6b02;">
+        <div class="feat-icon" style="background:rgba(255,255,255,0.18);">🏥</div>
+        <div class="feat-label" style="color:#fff;">Find a Vet</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">Nearby clinics, real hours, and honest reviews in one spot.</div>
+      </div>
+      <div class="feat-card" style="background:#fca7de;">
+        <div class="feat-icon" style="background:rgba(255,255,255,0.3);">🛡️</div>
+        <div class="feat-label" style="color:#111;">Insurance</div>
+        <div class="feat-desc" style="color:rgba(0,0,0,0.5);">Compare pet insurance plans side by side. Pick what fits.</div>
+      </div>
+      <div class="feat-card" style="background:#f30e15;">
+        <div class="feat-icon" style="background:rgba(251,230,77,0.18);">🐾</div>
+        <div class="feat-label" style="color:#FBE64D;">My Pet</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">A profile built just for your pet. Personalizable, always with you.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SECTION -->
+  <section class="ai-section">
+    <div class="ai-inner">
+      <div class="ai-tag">AI POWERED</div>
+      <h2>Not sure if it's serious?<br>Just take a photo.</h2>
+      <p>Velpi's AI reads the signs and tells you exactly what to do next — no guessing, no panic.</p>
+      <div class="risk-grid">
+        <div class="risk-item">
+          <div class="risk-dot" style="background:#63CC79;"></div>
+          <div class="risk-text">All good — keep an eye on it</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-dot" style="background:#FBE64D;"></div>
+          <div class="risk-text">Watch closely — check in today</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-dot" style="background:#f30e15;"></div>
+          <div class="risk-text">Go now — head to the vet</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-inner">
+      <h2>Get early access.</h2>
+      <p>Velpi is launching soon. Drop your email and be first in line.</p>
+      <div class="waitlist-form">
+        <input class="waitlist-input" type="email" placeholder="your@email.com" />
+        <button class="waitlist-btn">Join the waitlist</button>
+      </div>
+      <div class="waitlist-fine">No spam. Just your launch invite.</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <svg viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M108,170l-20-.35,44-69.5h46.3l-61,85.6h-39.5L0,100.15h46.2l42.1,69.85Z" fill="#FBE64D"/>
+      <path d="M270,155.5h41.3c-1.05,6.76-4.4,12.65-10.05,17.65-5.65,5.01-13.86,8.88-24.66,11.63-10.78,2.73-24.5,4.11-41.17,4.11-17.6,0-32.77-1.4-45.53-4.2-12.75-2.8-22.58-7.52-29.45-14.16-6.88-6.64-10.31-15.61-10.31-26.93s3.35-20.13,10.05-26.83c6.71-6.7,16.41-11.5,29.11-14.42,12.7-2.91,28.08-4.37,46.13-4.37s32.23,1.57,43.52,4.72c11.3,3.15,19.63,8.24,25,15.3,5.37,7.06,7.93,16.59,7.69,28.57h-118.87c.58,3.04,2.25,5.83,4.98,8.39,2.74,2.56,6.99,4.63,12.76,6.21,5.77,1.57,13.48,2.36,23.16,2.36s18.27-.7,24.74-2.1c6.47-1.4,10.35-3.38,11.63-5.94ZM236.9,124.5c-12.35,0-21.77,1.34-28.23,4.02-6.47,2.68-10.29,5.36-11.45,8.04h76.93c-.81-3.03-4.08-5.8-9.79-8.29-5.71-2.51-14.86-3.76-27.45-3.76Z" fill="#FBE64D"/>
+      <path d="M318,38h41.97v120.63h-41.97V38Z" fill="#FBE64D"/>
+      <path d="M362,100h39.52l2.45,33.24v87.41h-41.97V100ZM461.7,176.5c-10.49,0-19.94-1.08-28.34-3.23s-15.56-5.24-21.5-9.27c-5.95-4.02-10.49-8.83-13.65-14.42-3.15-5.59-4.72-11.77-4.72-18.53s1.57-12.9,4.72-18.43c3.15-5.53,7.69-10.31,13.65-14.33,5.95-4.02,13.11-7.1,21.5-9.27,8.39-2.15,17.84-3.23,28.34-3.23,12.59,0,23.8,1.78,33.66,5.33,9.86,3.56,17.58,8.72,23.16,15.47,5.59,6.77,8.39,14.92,8.39,24.47s-2.8,18.43-8.39,25.18c-5.59,6.77-13.31,11.84-23.16,15.2-9.86,3.37-21.07,5.07-33.66,5.07ZM443.7,148c4.47,0,8.27-.39,11.43-1.18,3.15-.79,5.55-1.95,7.19-3.5,1.64-1.54,2.46-3.5,2.46-5.86,0-3.48-1.84-6.1-5.52-7.88-3.68-1.77-8.86-2.66-15.56-2.66-4.99,0-9.57.29-13.74.89-4.17.59-7.52,1.66-10.04,3.2-2.53,1.54-3.79,3.69-3.79,6.45s1.26,4.91,3.79,6.45c2.52,1.54,5.87,2.61,10.04,3.2,4.17.59,8.75.89,13.74.89Z" fill="#f30e15"/>
+      <rect x="508" y="100" width="41.97" height="85.68" fill="#FBE64D"/>
+      <path d="M539.5,90c-2.08-.64-3.49-2.6-4.03-4.66-1.15-4.4-5.13-7.58-9.44-7.61-4.3.04-8.19,3.22-9.34,7.61-.54,2.06-1.95,4.02-4.03,4.66-4.8,1.47-7.88,5.72-7.55,10.54.32,4.57,3.65,9.28,8.17,9.28,4.94,0,5.55-2.03,8.02-3.02,0,0,2.47-1.1,4.77-1.1s4.77,1.1,4.77,1.1c2.47.98,3.07,3.02,8.02,3.02,4.52,0,7.85-4.7,8.17-9.28.33-4.82-2.74-9.07-7.55-10.54Z" fill="#f30e15"/>
+      <path d="M531.3,63.5c3.99-1.65,8.06.51,9.29,4.29,1.11,3.42-.42,7.33-3.96,8.73s-7.55-.12-9.16-3.72c-1.49-3.3-.11-7.65,3.83-9.29Z" fill="#f30e15"/>
+      <path d="M512.8,63.6c3.78-1.69,7.88.13,9.38,3.5s.07,7.75-3.56,9.32c-3.3,1.43-7.48.26-9.12-3.14s-.68-7.9,3.29-9.68Z" fill="#f30e15"/>
+      <path d="M501.3,79.3c3.62-1.56,7.49.18,8.79,3.48s.02,7.04-3.62,8.65c-2.95,1.29-6.67.05-8.34-3.13s-.55-7.4,3.17-8.99Z" fill="#f30e15"/>
+      <path d="M543.7,79.2c3.7-1.42,7.37.51,8.59,3.88s-.35,7.18-4.16,8.53c-2.9,1.03-6.71-.34-8.16-3.74-1.29-3-.12-7.19,3.74-8.67Z" fill="#f30e15"/>
+    </svg>
+    <div class="footer-text">© 2026 Velpi. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
