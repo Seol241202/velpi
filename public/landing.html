@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velpi — Your Pet's Health Hub</title>
+  <meta name="description" content="Health records, food checks, vet finder, insurance — everything your pet needs, all in one place." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style>
+    :root {
+      --yellow: #FBE64D;
+      --red: #f30e15;
+      --blue: #205fcc;
+      --orange: #fa6b02;
+      --pink: #fca7de;
+      --green: #63CC79;
+      --black: #111111;
+      --bg: #f4f2ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--black); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--yellow);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px;
+      border-bottom: 2px solid var(--black);
+    }
+    .nav-logo svg { width: 130px; height: auto; }
+    .nav-btn {
+      background: var(--black); color: var(--yellow);
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+      padding: 10px 20px; border-radius: 20px; border: none; cursor: pointer;
+      text-decoration: none; display: inline-block;
+    }
+
+    .hero {
+      background: var(--yellow);
+      padding: 140px 24px 60px;
+      text-align: center;
+      border-bottom: 2px solid var(--black);
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--black); color: var(--yellow);
+      font-size: 11px; font-weight: 600;
+      padding: 6px 16px; border-radius: 20px;
+      margin-bottom: 24px; letter-spacing: 1px;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(36px, 8vw, 72px);
+      font-weight: 800; line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--red); }
+    .hero p {
+      font-size: clamp(15px, 2vw, 18px);
+      color: #333; line-height: 1.7;
+      max-width: 560px; margin: 0 auto 36px;
+    }
+    .cta-main {
+      background: var(--red); color: var(--yellow);
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700;
+      padding: 16px 32px; border-radius: 16px; border: none; cursor: pointer;
+      text-decoration: none; display: inline-block;
+    }
+
+    .pet-bar {
+      background: var(--black);
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 24px;
+    }
+    .pet-ava {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--yellow); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 26px; flex-shrink: 0;
+      border: 2px solid var(--red);
+    }
+    .pet-name { font-size: 16px; font-weight: 700; color: var(--yellow); }
+    .pet-breed { font-size: 12px; color: rgba(255,255,255,0.45); }
+    .pet-add {
+      margin-left: auto; width: 38px; height: 38px;
+      border-radius: 50%; background: var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--black); font-size: 22px; font-weight: 700;
+    }
+
+    .features { padding: 60px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 10px; font-weight: 600; letter-spacing: 2.5px; opacity: 0.35; margin-bottom: 20px; }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .feat-card { border-radius: 24px; padding: 28px 22px; display: flex; flex-direction: column; gap: 10px; }
+    .feat-icon { font-size: 24px; width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .feat-label { font-size: 16px; font-weight: 700; line-height: 1.2; }
+    .feat-desc { font-size: 13px; line-height: 1.6; opacity: 0.7; }
+
+    .ai-section { background: var(--blue); padding: 60px 24px; }
+    .ai-inner { max-width: 800px; margin: 0 auto; }
+    .ai-tag {
+      display: inline-block;
+      background: rgba(251,230,77,0.18); color: var(--yellow);
+      font-size: 10px; font-weight: 600;
+      padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 16px; letter-spacing: 1px;
+    }
+    .ai-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800; color: #fff;
+      line-height: 1.2; margin-bottom: 14px;
+    }
+    .ai-section p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; margin-bottom: 28px; max-width: 560px; }
+    .risk-grid { display: flex; flex-direction: column; gap: 10px; max-width: 480px; }
+    .risk-item { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.1); border-radius: 14px; padding: 14px 16px; }
+    .risk-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .risk-text { font-size: 14px; color: #fff; font-weight: 600; }
+
+    /* Waitlist with Mailchimp */
+    .waitlist { background: var(--red); padding: 60px 24px; }
+    .waitlist-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+    .waitlist h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800; color: var(--yellow);
+      margin-bottom: 10px;
+    }
+    .waitlist p { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 28px; }
+
+    #mc_embed_signup {
+      background: transparent !important;
+      width: 100% !important;
+      font-family: 'Poppins', sans-serif !important;
+    }
+    #mc_embed_signup h2 { display: none; }
+    #mc_embed_signup .indicates-required { display: none; }
+    #mc_embed_signup .mc-field-group label { display: none; }
+    #mc_embed_signup .mc-field-group input[type="email"] {
+      width: 100% !important;
+      background: rgba(255,255,255,0.15) !important;
+      border: 1.5px solid rgba(255,255,255,0.25) !important;
+      border-radius: 14px !important;
+      padding: 15px 18px !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 14px !important;
+      color: #fff !important;
+      margin-bottom: 10px !important;
+      outline: none !important;
+    }
+    #mc_embed_signup .mc-field-group input[type="email"]::placeholder { color: rgba(255,255,255,0.5) !important; }
+    #mc_embed_signup #mc-embedded-subscribe {
+      background: var(--yellow) !important;
+      color: var(--black) !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      padding: 16px 32px !important;
+      border-radius: 14px !important;
+      border: none !important;
+      cursor: pointer !important;
+      width: 100% !important;
+      margin-top: 8px !important;
+      height: auto !important;
+      line-height: 1.4 !important;
+      white-space: normal !important;
+      min-height: 54px !important;
+    }
+    #mc_embed_signup .refferal_badge { display: none !important; }
+    #mc_embed_signup .optionalParent p { display: none !important; }
+    .waitlist-fine { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 14px; }
+
+    footer {
+      background: var(--black); padding: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px;
+    }
+    footer svg { width: 60px; height: auto; }
+    .footer-text { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+    @media (max-width: 600px) {
+      .feat-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140">
+        <defs><style>.cls-1{fill:red;}</style></defs>
+        <path d="M88.33,90.48l-15.06-.26,33.29-52.58h35.01l-46.1,64.73h-29.86L21.62,37.63h34.88l31.84,52.84Z"/>
+        <path d="M220.75,79.12h31.18c-.79,5.11-3.32,9.56-7.6,13.34-4.27,3.79-10.48,6.72-18.63,8.79-8.15,2.07-18.52,3.1-31.11,3.1-13.3,0-24.77-1.06-34.41-3.17s-17.06-5.68-22.26-10.7c-5.2-5.02-7.79-11.8-7.79-20.34s2.53-15.21,7.6-20.28,12.4-8.7,22-10.9c9.6-2.2,21.22-3.3,34.88-3.3s24.35,1.19,32.89,3.57c8.54,2.38,14.84,6.23,18.89,11.56,4.05,5.33,5.99,12.53,5.81,21.6h-89.83c.44,2.29,1.69,4.4,3.76,6.34,2.07,1.94,5.28,3.5,9.64,4.69,4.36,1.19,10.19,1.78,17.5,1.78s13.8-.53,18.69-1.59c4.89-1.06,7.81-2.55,8.79-4.49ZM193.27,54.81c-9.34,0-16.45,1.01-21.34,3.04-4.89,2.03-7.77,4.05-8.65,6.08h58.13c-.62-2.29-3.08-4.38-7.4-6.27-4.32-1.89-11.23-2.84-20.74-2.84Z"/>
+        <path d="M256.33,11.21h31.71v91.15h-31.71V11.21Z"/>
+        <path class="cls-1" d="M292.17,37.63h29.86l1.85,25.1v66.05h-31.71V37.63ZM372.76,104.35c-7.93,0-15.06-.82-21.4-2.44s-11.76-3.96-16.25-7c-4.49-3.04-7.93-6.67-10.3-10.9-2.38-4.23-3.57-8.89-3.57-14s1.19-9.75,3.57-13.94c2.38-4.18,5.81-7.79,10.3-10.83,4.49-3.04,9.91-5.37,16.25-7,6.34-1.63,13.47-2.44,21.4-2.44,9.51,0,17.99,1.34,25.43,4.03,7.44,2.69,13.28,6.58,17.5,11.69,4.23,5.11,6.34,11.27,6.34,18.49,0,7.58-2.11,13.92-6.34,19.02-4.23,5.11-10.06,8.94-17.5,11.49-7.44,2.55-15.92,3.83-25.43,3.83ZM358.96,77.96c3.37,0,6.25-.3,8.63-.89,2.38-.6,4.19-1.48,5.43-2.64,1.24-1.16,1.86-2.64,1.86-4.43,0-2.63-1.39-4.61-4.17-5.95-2.78-1.34-6.7-2.01-11.76-2.01-3.77,0-7.23.22-10.38.67-3.15.45-5.68,1.25-7.59,2.42-1.91,1.17-2.87,2.79-2.87,4.87s.95,3.71,2.87,4.87c1.91,1.17,4.44,1.97,7.59,2.42,3.15.45,6.61.67,10.38.67Z"/>
+        <rect x="426.67" y="37.63" width="31.71" height="64.73"/>
+        <path d="M442.59,33.07c-2.53,0-4.8-.26-6.82-.78s-3.75-1.26-5.18-2.23c-1.43-.97-2.53-2.13-3.28-3.47-.76-1.35-1.14-2.83-1.14-4.46s.38-3.11,1.14-4.44c.76-1.33,1.85-2.48,3.28-3.45s3.16-1.71,5.18-2.23c2.02-.52,4.29-.78,6.82-.78,3.03,0,5.73.43,8.11,1.28,2.37.86,4.23,2.1,5.58,3.73,1.35,1.63,2.02,3.59,2.02,5.89,0,2.41-.67,4.44-2.02,6.06-1.35,1.63-3.21,2.85-5.58,3.66-2.37.81-5.07,1.22-8.11,1.22Z"/>
+      </svg>
+    </div>
+    <a href="#waitlist" class="nav-btn">Join waitlist</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">YOUR PET'S HEALTH HUB</div>
+    <h1>Everything your pet needs,<br><span>all in one place.</span></h1>
+    <p>Health records, food checks, vet finder, insurance — stop switching between apps. Velpi has it all.</p>
+    <a href="#waitlist" class="cta-main">Get early access →</a>
+  </section>
+
+  <div class="pet-bar">
+    <div class="pet-ava">🐶</div>
+    <div>
+      <div class="pet-name">Seol</div>
+      <div class="pet-breed">Maltipoo · 3 yrs · 3.2 kg</div>
+    </div>
+    <div class="pet-add">+</div>
+  </div>
+
+  <section class="features">
+    <div class="section-label">BUILT FOR REAL PET PARENTS</div>
+    <div class="feat-grid">
+      <a href="/poop-check" style="text-decoration:none;">
+      <div class="feat-card" style="background:#205fcc;cursor:pointer;transition:transform 0.15s,opacity 0.15s;" onmouseover="this.style.transform='scale(1.02)';this.style.opacity='0.92'" onmouseout="this.style.transform='scale(1)';this.style.opacity='1'">
+        <div class="feat-icon" style="background:rgba(251,230,77,0.18);">📸</div>
+        <div class="feat-label" style="color:#fff;">AI Health Check</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">Snap a photo, get an instant risk level. No panic, just answers.</div>
+        <div style="color:#FBE64D;font-size:12px;font-weight:700;margin-top:4px;">Try it now →</div>
+      </div>
+      </a>
+      <div class="feat-card" style="background:#FBE64D;">
+        <div class="feat-icon" style="background:rgba(0,0,0,0.07);">🍖</div>
+        <div class="feat-label" style="color:#111;">Food Checker</div>
+        <div class="feat-desc" style="color:#555;">Find safe foods and the right kibble for your pet's needs.</div>
+      </div>
+      <div class="feat-card" style="background:#63CC79;">
+        <div class="feat-icon" style="background:rgba(255,255,255,0.2);">💉</div>
+        <div class="feat-label" style="color:#fff;">Vaccine Diary</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">Track every shot and never miss a booster again.</div>
+      </div>
+      <div class="feat-card" style="background:#fa6b02;">
+        <div class="feat-icon" style="background:rgba(255,255,255,0.18);">🏥</div>
+        <div class="feat-label" style="color:#fff;">Find a Vet</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">Nearby clinics, real hours, and honest reviews in one spot.</div>
+      </div>
+      <div class="feat-card" style="background:#fca7de;">
+        <div class="feat-icon" style="background:rgba(255,255,255,0.3);">🛡️</div>
+        <div class="feat-label" style="color:#111;">Insurance</div>
+        <div class="feat-desc" style="color:rgba(0,0,0,0.5);">Compare pet insurance plans side by side. Pick what fits.</div>
+      </div>
+      <div class="feat-card" style="background:#f30e15;">
+        <div class="feat-icon" style="background:rgba(251,230,77,0.18);">🐾</div>
+        <div class="feat-label" style="color:#FBE64D;">My Pet</div>
+        <div class="feat-desc" style="color:rgba(255,255,255,0.65);">A profile built just for your pet. Personalizable, always with you.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-section">
+    <div class="ai-inner">
+      <div class="ai-tag">AI POWERED</div>
+      <h2>Not sure if it's serious?<br>Just take a photo.</h2>
+      <p>Velpi's AI reads the signs and tells you exactly what to do next — no guessing, no panic.</p>
+      <div class="risk-grid">
+        <div class="risk-item">
+          <div class="risk-dot" style="background:#63CC79;"></div>
+          <div class="risk-text">All good — keep an eye on it</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-dot" style="background:#FBE64D;"></div>
+          <div class="risk-text">Watch closely — check in today</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-dot" style="background:#f30e15;"></div>
+          <div class="risk-text">Go now — head to the vet</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-inner">
+      <h2>Get early access.</h2>
+      <p>Velpi is launching soon. Drop your email and be first in line.</p>
+      <div id="mc_embed_shell">
+        <div id="mc_embed_signup">
+          <form action="https://pet.us18.list-manage.com/subscribe/post?u=1a982e54a5ee4a7d8d884bd4b&amp;id=b7317a22d6&amp;f_id=001babe6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+            <div id="mc_embed_signup_scroll">
+              <div class="mc-field-group">
+                <label for="mce-EMAIL">Email Address</label>
+                <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required placeholder="your@email.com">
+              </div>
+              <div id="mce-responses" class="clear foot">
+                <div class="response" id="mce-error-response" style="display:none;"></div>
+                <div class="response" id="mce-success-response" style="display:none;"></div>
+              </div>
+              <div aria-hidden="true" style="position:absolute;left:-5000px;">
+                <input type="text" name="b_1a982e54a5ee4a7d8d884bd4b_b7317a22d6" tabindex="-1" value="">
+              </div>
+              <div class="optionalParent">
+                <div class="clear foot">
+                  <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Join the waitlist →">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="waitlist-fine">No spam. Just your launch invite.</div>
+    </div>
+  </section>
+
+  <footer>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140">
+      <defs><style>.footer-cls-1{fill:#FBE64D;}.footer-cls-2{fill:red;}</style></defs>
+      <path class="footer-cls-1" d="M88.33,90.48l-15.06-.26,33.29-52.58h35.01l-46.1,64.73h-29.86L21.62,37.63h34.88l31.84,52.84Z"/>
+      <path class="footer-cls-1" d="M220.75,79.12h31.18c-.79,5.11-3.32,9.56-7.6,13.34-4.27,3.79-10.48,6.72-18.63,8.79-8.15,2.07-18.52,3.1-31.11,3.1-13.3,0-24.77-1.06-34.41-3.17s-17.06-5.68-22.26-10.7c-5.2-5.02-7.79-11.8-7.79-20.34s2.53-15.21,7.6-20.28,12.4-8.7,22-10.9c9.6-2.2,21.22-3.3,34.88-3.3s24.35,1.19,32.89,3.57c8.54,2.38,14.84,6.23,18.89,11.56,4.05,5.33,5.99,12.53,5.81,21.6h-89.83c.44,2.29,1.69,4.4,3.76,6.34,2.07,1.94,5.28,3.5,9.64,4.69,4.36,1.19,10.19,1.78,17.5,1.78s13.8-.53,18.69-1.59c4.89-1.06,7.81-2.55,8.79-4.49ZM193.27,54.81c-9.34,0-16.45,1.01-21.34,3.04-4.89,2.03-7.77,4.05-8.65,6.08h58.13c-.62-2.29-3.08-4.38-7.4-6.27-4.32-1.89-11.23-2.84-20.74-2.84Z"/>
+      <path class="footer-cls-1" d="M256.33,11.21h31.71v91.15h-31.71V11.21Z"/>
+      <path class="footer-cls-2" d="M292.17,37.63h29.86l1.85,25.1v66.05h-31.71V37.63ZM372.76,104.35c-7.93,0-15.06-.82-21.4-2.44s-11.76-3.96-16.25-7c-4.49-3.04-7.93-6.67-10.3-10.9-2.38-4.23-3.57-8.89-3.57-14s1.19-9.75,3.57-13.94c2.38-4.18,5.81-7.79,10.3-10.83,4.49-3.04,9.91-5.37,16.25-7,6.34-1.63,13.47-2.44,21.4-2.44,9.51,0,17.99,1.34,25.43,4.03,7.44,2.69,13.28,6.58,17.5,11.69,4.23,5.11,6.34,11.27,6.34,18.49,0,7.58-2.11,13.92-6.34,19.02-4.23,5.11-10.06,8.94-17.5,11.49-7.44,2.55-15.92,3.83-25.43,3.83ZM358.96,77.96c3.37,0,6.25-.3,8.63-.89,2.38-.6,4.19-1.48,5.43-2.64,1.24-1.16,1.86-2.64,1.86-4.43,0-2.63-1.39-4.61-4.17-5.95-2.78-1.34-6.7-2.01-11.76-2.01-3.77,0-7.23.22-10.38.67-3.15.45-5.68,1.25-7.59,2.42-1.91,1.17-2.87,2.79-2.87,4.87s.95,3.71,2.87,4.87c1.91,1.17,4.44,1.97,7.59,2.42,3.15.45,6.61.67,10.38.67Z"/>
+      <rect class="footer-cls-1" x="426.67" y="37.63" width="31.71" height="64.73"/>
+      <path class="footer-cls-1" d="M442.59,33.07c-2.53,0-4.8-.26-6.82-.78s-3.75-1.26-5.18-2.23c-1.43-.97-2.53-2.13-3.28-3.47-.76-1.35-1.14-2.83-1.14-4.46s.38-3.11,1.14-4.44c.76-1.33,1.85-2.48,3.28-3.45s3.16-1.71,5.18-2.23c2.02-.52,4.29-.78,6.82-.78,3.03,0,5.73.43,8.11,1.28,2.37.86,4.23,2.1,5.58,3.73,1.35,1.63,2.02,3.59,2.02,5.89,0,2.41-.67,4.44-2.02,6.06-1.35,1.63-3.21,2.85-5.58,3.66-2.37.81-5.07,1.22-8.11,1.22Z"/>
+    </svg>
+    <div class="footer-text">© 2026 Velpi. All rights reserved.</div>
+  </footer>
+
+  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+  <script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+</body>
+</html>
