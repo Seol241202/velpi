@@ -9,23 +9,19 @@ export async function POST(req: NextRequest) {
 
     const response = await client.messages.create({
       model: "claude-opus-4-5",
-      max_tokens: 1024,
+      max_tokens: 512,
       messages: [{
         role: "user",
-        content: `You are a dog nutrition expert. Analyze these dog food ingredients:
+        content: `Analyze these dog food ingredients and identify the main protein sources:
 
 INGREDIENTS: ${ingredients}
 
 Respond ONLY with a raw JSON object. No markdown, no backticks:
 {
-  "overall": "Good/Average/Poor",
-  "score": 1,
-  "goodIngredients": ["list", "of", "good", "ingredients"],
-  "badIngredients": ["list", "of", "concerning", "ingredients"],
-  "allergens": ["common", "allergens", "present"],
-  "protein": "estimated protein quality description",
-  "summary": "2-3 sentence summary"
-}`
+  "detectedProteins": ["chicken", "fish", "beef", "turkey", "lamb", "pork", "salmon"]
+}
+
+Only include proteins that are actually present. Use lowercase. Only use these values: chicken, fish, beef, turkey, lamb, pork, salmon`
       }]
     });
 
